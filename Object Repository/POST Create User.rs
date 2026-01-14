@@ -12,7 +12,7 @@
    <followRedirects>true</followRedirects>
    <httpBody></httpBody>
    <httpBodyContent>{
-  &quot;text&quot;: &quot;{\n  \&quot;name\&quot;: \&quot;Sandra1\&quot;,\n  \&quot;job\&quot;: \&quot;QA Tester\&quot;,\n  \&quot;salary\&quot;: 100\n}\n&quot;,
+  &quot;text&quot;: &quot;{\n  \&quot;name\&quot;: \&quot;Sandra6\&quot;,\n  \&quot;job\&quot;: \&quot;QA Tester\&quot;,\n  \&quot;salary\&quot;: 200000\n}\n&quot;,
   &quot;contentType&quot;: &quot;application/json&quot;,
   &quot;charset&quot;: &quot;UTF-8&quot;
 }</httpBodyContent>
@@ -39,15 +39,6 @@
    <soapServiceFunction></soapServiceFunction>
    <socketTimeout>0</socketTimeout>
    <useServiceInfoFromWsdl>true</useServiceInfoFromWsdl>
-   <validationSteps>
-      <id>2a84e4c6-cb1f-4394-bfa5-e137ca497698</id>
-      <name>New Validation</name>
-      <type>JSON_SCHEMA</type>
-      <dataType>FILE</dataType>
-      <target>RESPONSE</target>
-      <data>schemauser.json</data>
-      <activate>true</activate>
-   </validationSteps>
    <verificationScript>import static org.assertj.core.api.Assertions.*
 
 import com.kms.katalon.core.testobject.RequestObject
@@ -60,6 +51,10 @@ import internal.GlobalVariable as GlobalVariable
 
 RequestObject request = WSResponseManager.getInstance().getCurrentRequest()
 
-ResponseObject response = WSResponseManager.getInstance().getCurrentResponse()</verificationScript>
+ResponseObject response = WSResponseManager.getInstance().getCurrentResponse()
+
+WS.verifyResponseStatusCode(response, 201)
+
+assertThat(response.getStatusCode()).isEqualTo(201)</verificationScript>
    <wsdlAddress></wsdlAddress>
 </WebServiceRequestEntity>

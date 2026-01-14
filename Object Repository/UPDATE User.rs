@@ -12,7 +12,7 @@
    <followRedirects>true</followRedirects>
    <httpBody></httpBody>
    <httpBodyContent>{
-  &quot;text&quot;: &quot;{\n  \&quot;name\&quot;: \&quot;Sandra\&quot;,\n  \&quot;job\&quot;: \&quot;QA LevelUp\&quot;,\n  \&quot;salary\&quot;: 1000\n}\n&quot;,
+  &quot;text&quot;: &quot;{\n  \&quot;name\&quot;: \&quot;Sandra\&quot;,\n  \&quot;job\&quot;: \&quot;QA LevelUpUp\&quot;,\n  \&quot;salary\&quot;: \&quot;50000000\&quot;\n}\n&quot;,
   &quot;contentType&quot;: &quot;application/json&quot;,
   &quot;charset&quot;: &quot;UTF-8&quot;
 }</httpBodyContent>
@@ -51,6 +51,11 @@ import internal.GlobalVariable as GlobalVariable
 
 RequestObject request = WSResponseManager.getInstance().getCurrentRequest()
 
-ResponseObject response = WSResponseManager.getInstance().getCurrentResponse()</verificationScript>
+ResponseObject response = WSResponseManager.getInstance().getCurrentResponse()
+
+
+WS.verifyResponseStatusCode(response, 200)
+
+assertThat(response.getStatusCode()).isEqualTo(200)</verificationScript>
    <wsdlAddress></wsdlAddress>
 </WebServiceRequestEntity>

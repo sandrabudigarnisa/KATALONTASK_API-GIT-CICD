@@ -29,11 +29,11 @@
    <useServiceInfoFromWsdl>true</useServiceInfoFromWsdl>
    <validationSteps>
       <id>3a1c4270-287e-40a4-afdd-530804c1bb3d</id>
-      <name>New Validation</name>
+      <name>Validation User By ID</name>
       <type>JSON_SCHEMA</type>
       <dataType>FILE</dataType>
       <target>RESPONSE</target>
-      <data>schemauser.json</data>
+      <data>schemauserbyid.json</data>
       <activate>true</activate>
    </validationSteps>
    <verificationScript>import static org.assertj.core.api.Assertions.*

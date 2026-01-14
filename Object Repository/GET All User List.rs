@@ -41,11 +41,11 @@
    <useServiceInfoFromWsdl>true</useServiceInfoFromWsdl>
    <validationSteps>
       <id>e82e083d-5b0a-407d-9d14-e60b9dfb6c3a</id>
-      <name>New Validation</name>
-      <type>AUTO_DETECT</type>
-      <dataType>AUTO</dataType>
+      <name>Validation All User List</name>
+      <type>JSON_SCHEMA</type>
+      <dataType>FILE</dataType>
       <target>RESPONSE</target>
-      <data></data>
+      <data>schemauser.json</data>
       <activate>true</activate>
    </validationSteps>
    <verificationScript>import static org.assertj.core.api.Assertions.*
@@ -60,6 +60,10 @@ import internal.GlobalVariable as GlobalVariable
 
 RequestObject request = WSResponseManager.getInstance().getCurrentRequest()
 
-ResponseObject response = WSResponseManager.getInstance().getCurrentResponse()</verificationScript>
+ResponseObject response = WSResponseManager.getInstance().getCurrentResponse()
+
+WS.verifyResponseStatusCode(response, 200)
+
+assertThat(response.getStatusCode()).isEqualTo(200)</verificationScript>
    <wsdlAddress></wsdlAddress>
 </WebServiceRequestEntity>
