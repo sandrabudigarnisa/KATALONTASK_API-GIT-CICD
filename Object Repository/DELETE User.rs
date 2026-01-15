@@ -30,7 +30,7 @@
    <migratedVersion>5.4.1</migratedVersion>
    <path></path>
    <restRequestMethod>DELETE</restRequestMethod>
-   <restUrl>https://68ecb27deff9ad3b1402e423.mockapi.io/api/crm/users/193</restUrl>
+   <restUrl>https://68ecb27deff9ad3b1402e423.mockapi.io/api/crm/users/206</restUrl>
    <serviceType>RESTful</serviceType>
    <soapBody></soapBody>
    <soapHeader></soapHeader>
