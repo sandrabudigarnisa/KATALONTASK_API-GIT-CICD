@@ -30,7 +30,7 @@
    <migratedVersion>5.4.1</migratedVersion>
    <path></path>
    <restRequestMethod>POST</restRequestMethod>
-   <restUrl>https://68ecb27deff9ad3b1402e423.mockapi.io/api/crm/users</restUrl>
+   <restUrl>${GlobalVariable.baseUrl}/api/crm/users</restUrl>
    <serviceType>RESTful</serviceType>
    <soapBody></soapBody>
    <soapHeader></soapHeader>
