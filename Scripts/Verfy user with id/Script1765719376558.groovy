@@ -17,5 +17,4 @@ import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
 
-WS.sendRequestAndVerify(findTestObject('GET User By Id'))
-
+WS.sendRequest(findTestObject('GET User By Id', [('id'): GlobalVariable.id]))

@@ -12,7 +12,7 @@
    <followRedirects>true</followRedirects>
    <httpBody></httpBody>
    <httpBodyContent>{
-  &quot;text&quot;: &quot;{\n  \&quot;name\&quot;: \&quot;Sandra7\&quot;,\n  \&quot;job\&quot;: \&quot;QA Tester\&quot;,\n  \&quot;salary\&quot;: 200000\n}\n&quot;,
+  &quot;text&quot;: &quot;{\n  \&quot;name\&quot;: \&quot;Sandra9\&quot;,\n  \&quot;job\&quot;: \&quot;QA Tester\&quot;,\n  \&quot;salary\&quot;: 200000\n}\n&quot;,
   &quot;contentType&quot;: &quot;application/json&quot;,
   &quot;charset&quot;: &quot;UTF-8&quot;
 }</httpBodyContent>
@@ -39,22 +39,29 @@
    <soapServiceFunction></soapServiceFunction>
    <socketTimeout>0</socketTimeout>
    <useServiceInfoFromWsdl>true</useServiceInfoFromWsdl>
-   <verificationScript>import static org.assertj.core.api.Assertions.*
-
-import com.kms.katalon.core.testobject.RequestObject
+   <verificationScript>import com.kms.katalon.core.testobject.RequestObject
 import com.kms.katalon.core.testobject.ResponseObject
-import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webservice.verification.WSResponseManager
-
+import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+import com.kms.katalon.core.util.KeywordUtil
+import internal.GlobalVariable
 import groovy.json.JsonSlurper
-import internal.GlobalVariable as GlobalVariable
 
 RequestObject request = WSResponseManager.getInstance().getCurrentRequest()
-
 ResponseObject response = WSResponseManager.getInstance().getCurrentResponse()
 
 WS.verifyResponseStatusCode(response, 201)
 
-assertThat(response.getStatusCode()).isEqualTo(201)</verificationScript>
+def bodyText = response.getResponseText()
+
+//Parse JSON &amp; ambil id
+def json = new JsonSlurper().parseText(bodyText)
+def idVal = json?.id ?: json?.data?.id
+
+assert idVal != null : &quot;ID tidak ditemukan di response body!&quot;
+
+//Simpan ke GlobalVariable.id buat dipakai test case lain
+GlobalVariable.id = idVal.toString()
+KeywordUtil.logInfo(&quot;Saved GlobalVariable.id = &quot; + GlobalVariable.id)</verificationScript>
    <wsdlAddress></wsdlAddress>
 </WebServiceRequestEntity>

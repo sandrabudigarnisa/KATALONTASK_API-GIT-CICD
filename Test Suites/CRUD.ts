@@ -29,7 +29,7 @@
       <guid>671fe730-9fff-4fae-9c8d-712c4f8e36a3</guid>
       <isReuseDriver>false</isReuseDriver>
       <isRun>true</isRun>
-      <testCaseId>Test Cases/Verfy user with id 21</testCaseId>
+      <testCaseId>Test Cases/Verfy user with id</testCaseId>
       <usingDataBindingAtTestSuiteLevel>true</usingDataBindingAtTestSuiteLevel>
    </testCaseLink>
    <testCaseLink>

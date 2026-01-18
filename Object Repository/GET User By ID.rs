@@ -18,7 +18,7 @@
    <migratedVersion>5.4.1</migratedVersion>
    <path></path>
    <restRequestMethod>GET</restRequestMethod>
-   <restUrl>${GlobalVariable.baseUrl}/api/crm/users/21</restUrl>
+   <restUrl>${GlobalVariable.baseUrl}/api/crm/users/${id}</restUrl>
    <serviceType>RESTful</serviceType>
    <soapBody></soapBody>
    <soapHeader></soapHeader>
@@ -47,12 +47,17 @@ import groovy.json.JsonSlurper
 import internal.GlobalVariable as GlobalVariable
 
 RequestObject request = WSResponseManager.getInstance().getCurrentRequest()
-
 ResponseObject response = WSResponseManager.getInstance().getCurrentResponse()
 
-
 WS.verifyResponseStatusCode(response, 200)
+assertThat(response.getStatusCode()).isEqualTo(200)
 
-assertThat(response.getStatusCode()).isEqualTo(200)</verificationScript>
+//tambahan verify id
+def json = new JsonSlurper().parseText(response.getResponseText())
+def returnedId = (json?.id ?: json?.data?.id)
+
+assert returnedId != null : &quot;Response tidak punya field id. Body=&quot; + response.getResponseText()
+assertThat(returnedId.toString()).isEqualTo(GlobalVariable.id.toString())
+</verificationScript>
    <wsdlAddress></wsdlAddress>
 </WebServiceRequestEntity>
