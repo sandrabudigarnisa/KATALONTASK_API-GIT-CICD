@@ -46,35 +46,21 @@
       <masked>false</masked>
       <name>name</name>
    </variables>
-   <verificationScript>import com.kms.katalon.core.testobject.RequestObject
-import com.kms.katalon.core.testobject.ResponseObject
-import com.kms.katalon.core.util.KeywordUtil
+   <verificationScript>import com.kms.katalon.core.testobject.ResponseObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webservice.verification.WSResponseManager
 import groovy.json.JsonSlurper
 import internal.GlobalVariable
 
-RequestObject request = WSResponseManager.getInstance().getCurrentRequest()
 ResponseObject response = WSResponseManager.getInstance().getCurrentResponse()
-
-KeywordUtil.logInfo(&quot;REQUEST URL: &quot; + request.getRestUrl())
-KeywordUtil.logInfo(&quot;REQUEST HEADERS: &quot; + request.getHttpHeaderProperties())
-KeywordUtil.logInfo(&quot;REQUEST BODY: &quot; + request.getBodyContent()?.getText())
 
 WS.verifyResponseStatusCode(response, 201)
 
-def body = response.getResponseText()
-KeywordUtil.logInfo(&quot;RESPONSE CODE: &quot; + response.getStatusCode())
-KeywordUtil.logInfo(&quot;RESPONSE BODY: &quot; + body)
-
-// ambil ID dan simpan
-def json = new JsonSlurper().parseText(body)
+def json = new JsonSlurper().parseText(response.getResponseText())
 def idVal = json?.id ?: json?.data?.id
-
-assert idVal != null : &quot;ID tidak ditemukan di response (cek field id / data.id). Response: &quot; + body
+assert idVal != null : &quot;ID tidak ditemukan di response (id / data.id)&quot;
 
 GlobalVariable.id = idVal.toString()
-KeywordUtil.logInfo(&quot;Saved GlobalVariable.id = &quot; + GlobalVariable.id)
 </verificationScript>
    <wsdlAddress></wsdlAddress>
 </WebServiceRequestEntity>
