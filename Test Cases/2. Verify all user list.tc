@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Verfy delete user by Id</name>
+   <name>2. Verify all user list</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>6f7341fd-a1d4-41ed-b2f7-b3fc45758646</testCaseGuid>
+   <testCaseGuid>64a6542d-03c6-4aa5-a029-07ca5afca7c2</testCaseGuid>
 </TestCaseEntity>

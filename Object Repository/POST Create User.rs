@@ -12,7 +12,7 @@
    <followRedirects>true</followRedirects>
    <httpBody></httpBody>
    <httpBodyContent>{
-  &quot;text&quot;: &quot;{\n  \&quot;name\&quot;: \&quot;Sandra9\&quot;,\n  \&quot;job\&quot;: \&quot;QA Tester\&quot;,\n  \&quot;salary\&quot;: 200000\n}\n&quot;,
+  &quot;text&quot;: &quot;{\n  \&quot;name\&quot;: \&quot;${name}\&quot;,\n  \&quot;job\&quot;: \&quot;QA Tester New\&quot;,\n  \&quot;salary\&quot;: 10000101010\n}\n&quot;,
   &quot;contentType&quot;: &quot;application/json&quot;,
   &quot;charset&quot;: &quot;UTF-8&quot;
 }</httpBodyContent>
@@ -39,29 +39,21 @@
    <soapServiceFunction></soapServiceFunction>
    <socketTimeout>0</socketTimeout>
    <useServiceInfoFromWsdl>true</useServiceInfoFromWsdl>
-   <verificationScript>import com.kms.katalon.core.testobject.RequestObject
-import com.kms.katalon.core.testobject.ResponseObject
-import com.kms.katalon.core.webservice.verification.WSResponseManager
+   <verificationScript>import com.kms.katalon.core.testobject.ResponseObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
-import com.kms.katalon.core.util.KeywordUtil
-import internal.GlobalVariable
+import com.kms.katalon.core.webservice.verification.WSResponseManager
 import groovy.json.JsonSlurper
+import internal.GlobalVariable
 
-RequestObject request = WSResponseManager.getInstance().getCurrentRequest()
 ResponseObject response = WSResponseManager.getInstance().getCurrentResponse()
 
 WS.verifyResponseStatusCode(response, 201)
 
-def bodyText = response.getResponseText()
-
-//Parse JSON &amp; ambil id
-def json = new JsonSlurper().parseText(bodyText)
+def json = new JsonSlurper().parseText(response.getResponseText())
 def idVal = json?.id ?: json?.data?.id
 
-assert idVal != null : &quot;ID tidak ditemukan di response body!&quot;
-
-//Simpan ke GlobalVariable.id buat dipakai test case lain
+assert idVal != null : &quot;ID tidak ditemukan di response (id / data.id)&quot;
 GlobalVariable.id = idVal.toString()
-KeywordUtil.logInfo(&quot;Saved GlobalVariable.id = &quot; + GlobalVariable.id)</verificationScript>
+</verificationScript>
    <wsdlAddress></wsdlAddress>
 </WebServiceRequestEntity>

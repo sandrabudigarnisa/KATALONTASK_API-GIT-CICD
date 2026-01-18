@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>Verfy user with id</name>
+   <name>1. Verfy create new user</name>
    <tag></tag>
    <comment></comment>
    <recordOption>OTHER</recordOption>
-   <testCaseGuid>a751a286-0ea4-4b90-869f-1ee673210414</testCaseGuid>
+   <testCaseGuid>4b13dbd1-fe50-42e4-9d1d-a46e511b413a</testCaseGuid>
 </TestCaseEntity>
