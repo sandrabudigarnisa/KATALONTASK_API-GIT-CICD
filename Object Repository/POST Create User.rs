@@ -12,7 +12,7 @@
    <followRedirects>true</followRedirects>
    <httpBody></httpBody>
    <httpBodyContent>{
-  &quot;text&quot;: &quot;{\n  \&quot;name\&quot;: \&quot;${name}\&quot;,\n  \&quot;job\&quot;: \&quot;QA Tester New\&quot;,\n  \&quot;salary\&quot;: 10000101010\n}\n&quot;,
+  &quot;text&quot;: &quot;{\n  \&quot;name\&quot;: \&quot;${name}\&quot;,\n  \&quot;job\&quot;: \&quot;${job}\&quot;,\n  \&quot;salary\&quot;: ${salary}\n}\n&quot;,
   &quot;contentType&quot;: &quot;application/json&quot;,
   &quot;charset&quot;: &quot;UTF-8&quot;
 }</httpBodyContent>
@@ -39,21 +39,35 @@
    <soapServiceFunction></soapServiceFunction>
    <socketTimeout>0</socketTimeout>
    <useServiceInfoFromWsdl>true</useServiceInfoFromWsdl>
-   <verificationScript>import com.kms.katalon.core.testobject.ResponseObject
-import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+   <variables>
+      <defaultValue>'Sandra_Default'</defaultValue>
+      <description></description>
+      <id>87837bd8-6546-4da6-b89e-855923cf89fd</id>
+      <masked>false</masked>
+      <name>name</name>
+   </variables>
+   <verificationScript>import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webservice.verification.WSResponseManager
+import com.kms.katalon.core.util.KeywordUtil
 import groovy.json.JsonSlurper
-import internal.GlobalVariable
+import internal.GlobalVariable as GlobalVariable
 
-ResponseObject response = WSResponseManager.getInstance().getCurrentResponse()
+def response = WSResponseManager.getInstance().getCurrentResponse()
 
 WS.verifyResponseStatusCode(response, 201)
 
-def json = new JsonSlurper().parseText(response.getResponseText())
+def body = response.getResponseText()
+KeywordUtil.logInfo(&quot;POST Create User response body: &quot; + body)
+
+// ambil id
+def json = new JsonSlurper().parseText(body)
 def idVal = json?.id ?: json?.data?.id
 
-assert idVal != null : &quot;ID tidak ditemukan di response (id / data.id)&quot;
+assert idVal != null : &quot;ID tidak ditemukan di response (cek field id / data.id). Body: &quot; + body&quot;
+
+// simpan buat dipakai GET/PUT/DELETE berikutnya
 GlobalVariable.id = idVal.toString()
+KeywordUtil.logInfo(&quot;Saved GlobalVariable.id = &quot; + GlobalVariable.id)
 </verificationScript>
    <wsdlAddress></wsdlAddress>
 </WebServiceRequestEntity>
