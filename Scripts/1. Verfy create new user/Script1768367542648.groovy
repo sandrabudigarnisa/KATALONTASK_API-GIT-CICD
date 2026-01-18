@@ -1,19 +1,17 @@
-def uniqueName = "Sandra_" + System.currentTimeMillis()
+import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
 
-KeywordUtil.logInfo("PROFILE baseUrl = " + GlobalVariable.baseUrl)
-KeywordUtil.logInfo("Create user uniqueName = " + uniqueName)
+import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
+import groovy.json.JsonSlurper
+import internal.GlobalVariable
 
-def response = WS.sendRequest(findTestObject('POST Create User', [
-  ('name') : uniqueName
-]))
+def res = WS.sendRequest(findTestObject('POST Create User'))
 
-KeywordUtil.logInfo("StatusCode = " + response.getStatusCode())
-KeywordUtil.logInfo("ResponseBody = " + response.getResponseText())
+WS.verifyResponseStatusCode(res, 201)
 
-WS.verifyResponseStatusCode(response, 201)
-
-// ambil id
-def json = new groovy.json.JsonSlurper().parseText(response.getResponseText())
+def json = new JsonSlurper().parseText(res.getResponseText())
 def idVal = json?.id ?: json?.data?.id
-assert idVal != null : "ID tidak ditemukan di response (cek field id / data.id)"
+
+assert idVal != null && idVal.toString().trim() != "" : "ID tidak ketemu di response POST"
+
 GlobalVariable.id = idVal.toString()
+println("Saved GlobalVariable.id = " + GlobalVariable.id)

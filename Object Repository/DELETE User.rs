@@ -39,18 +39,16 @@
    <soapServiceFunction></soapServiceFunction>
    <socketTimeout>0</socketTimeout>
    <useServiceInfoFromWsdl>true</useServiceInfoFromWsdl>
-   <verificationScript>import static org.assertj.core.api.Assertions.*
-
-import com.kms.katalon.core.testobject.RequestObject
-import com.kms.katalon.core.testobject.ResponseObject
+   <verificationScript>import com.kms.katalon.core.testobject.ResponseObject
 import com.kms.katalon.core.webservice.verification.WSResponseManager
-import internal.GlobalVariable as GlobalVariable
+import com.kms.katalon.core.util.KeywordUtil
 
-RequestObject request = WSResponseManager.getInstance().getCurrentRequest()
 ResponseObject response = WSResponseManager.getInstance().getCurrentResponse()
 
-int statusCode = response.getStatusCode()
+def sc = response.getStatusCode()
+assert (sc == 200 || sc == 204) : &quot;Delete gagal. Status code=&quot; + sc
 
-assertThat(statusCode).isIn(200, 204)</verificationScript>
+KeywordUtil.logInfo(&quot;DELETE status=&quot; + sc)
+</verificationScript>
    <wsdlAddress></wsdlAddress>
 </WebServiceRequestEntity>

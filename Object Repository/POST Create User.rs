@@ -12,7 +12,7 @@
    <followRedirects>true</followRedirects>
    <httpBody></httpBody>
    <httpBodyContent>{
-  &quot;text&quot;: &quot;{\n  \&quot;name\&quot;: \&quot;${name}\&quot;,\n  \&quot;job\&quot;: \&quot;${job}\&quot;,\n  \&quot;salary\&quot;: ${salary}\n}\n&quot;,
+  &quot;text&quot;: &quot;{\n  \&quot;name\&quot;: \&quot;Sandra10\&quot;,\n  \&quot;job\&quot;: \&quot;QA Tester\&quot;,\n  \&quot;salary\&quot;: 1000\n}\n&quot;,
   &quot;contentType&quot;: &quot;application/json&quot;,
   &quot;charset&quot;: &quot;UTF-8&quot;
 }</httpBodyContent>
@@ -39,18 +39,11 @@
    <soapServiceFunction></soapServiceFunction>
    <socketTimeout>0</socketTimeout>
    <useServiceInfoFromWsdl>true</useServiceInfoFromWsdl>
-   <variables>
-      <defaultValue>'Sandra_Default'</defaultValue>
-      <description></description>
-      <id>87837bd8-6546-4da6-b89e-855923cf89fd</id>
-      <masked>false</masked>
-      <name>name</name>
-   </variables>
    <verificationScript>import com.kms.katalon.core.testobject.ResponseObject
-import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webservice.verification.WSResponseManager
-import groovy.json.JsonSlurper
+import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import internal.GlobalVariable
+import groovy.json.JsonSlurper
 
 ResponseObject response = WSResponseManager.getInstance().getCurrentResponse()
 
@@ -58,7 +51,8 @@ WS.verifyResponseStatusCode(response, 201)
 
 def json = new JsonSlurper().parseText(response.getResponseText())
 def idVal = json?.id ?: json?.data?.id
-assert idVal != null : &quot;ID tidak ditemukan di response (id / data.id)&quot;
+
+assert idVal != null : &quot;ID tidak ditemukan di response body!&quot;
 
 GlobalVariable.id = idVal.toString()
 </verificationScript>
